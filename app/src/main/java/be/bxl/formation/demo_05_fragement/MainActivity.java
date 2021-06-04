@@ -65,6 +65,16 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
 
         FragmentTransaction transaction = fm.beginTransaction();
+
+        // Ajout d'une animation
+        transaction.setCustomAnimations(
+            android.R.anim.slide_in_left,
+            android.R.anim.fade_out,
+            android.R.anim.fade_in,
+            android.R.anim.slide_out_right
+        );
+        // Plus d'info : https://developer.android.com/guide/fragments/animate
+
         transaction.replace(R.id.container_fragment, detailFragment);
         transaction.addToBackStack(null);
 
