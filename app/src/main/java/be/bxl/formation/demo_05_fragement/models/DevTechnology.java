@@ -80,6 +80,12 @@ public class DevTechnology implements Parcelable {
     }
     //endregion
 
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
     //region Implementation necessaire pour le Parcelable
     @Override
     public void writeToParcel(Parcel dest, int flags) {
