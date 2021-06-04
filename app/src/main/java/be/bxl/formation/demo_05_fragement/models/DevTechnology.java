@@ -1,9 +1,13 @@
 package be.bxl.formation.demo_05_fragement.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RawRes;
 
-public class DevTechnology {
+// Tips : Implementation automatique via  "Alt+Enter -> Add Parcelable Implementation"
+public class DevTechnology implements Parcelable {
 
     public enum TechnoEnum {
         LIBRARY,
@@ -76,4 +80,43 @@ public class DevTechnology {
     }
     //endregion
 
+    //region Implementation necessaire pour le Parcelable
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        // Découpe les données sous forme de parcel
+        dest.writeLong(id);
+        dest.writeString(name);
+        dest.writeString(desc);
+        dest.writeString(techno.name());
+        dest.writeInt(resImg);
+    }
+
+    @Override
+    public int describeContents() {
+        // Défini le nombre d'objet complexe contenu dans mon objet (Parcelable / Serializable)
+        return 0;
+    }
+
+    DevTechnology(Parcel parcel) {
+        // Recréer l'objet via la parcel => Atttention l'ordre doit être identique au "writeToParcel"
+        this.id = parcel.readLong();
+        this.name = parcel.readString();
+        this.desc = parcel.readString();
+        this.techno = TechnoEnum.valueOf(parcel.readString());
+        this.resImg = parcel.readInt();
+    }
+
+    // Définition d'un CREATOR => Permet de recréer l'objet depuis la parcel
+    public static final Parcelable.Creator<DevTechnology> CREATOR = new Creator<DevTechnology>() {
+        @Override
+        public DevTechnology createFromParcel(Parcel source) {
+            return new DevTechnology(source);
+        }
+
+        @Override
+        public DevTechnology[] newArray(int size) {
+            return new DevTechnology[size];
+        }
+    };
+    //endregion
 }
