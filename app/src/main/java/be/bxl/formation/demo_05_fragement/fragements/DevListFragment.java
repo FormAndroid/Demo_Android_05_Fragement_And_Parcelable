@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -90,22 +89,22 @@ public class DevListFragment extends Fragment {
 
             DevTechnology technology = devTechnologies.get(position);
 
-            if(event != null) {
-                event.onClickItem(technology);
+            if(eventListener != null) {
+                eventListener.onClickItem(technology);
             }
         });
     }
 
     //region Evenement sur la liste
     @FunctionalInterface
-    public interface OnClickItemListener {
+    public interface OnTechnologyClickListener {
         void onClickItem(DevTechnology technology);
     }
 
-    private OnClickItemListener event;
+    private OnTechnologyClickListener eventListener;
 
-    public void setOnClickItemListener(OnClickItemListener event) {
-        this.event = event;
+    public void setOnTechnologyClickListener(OnTechnologyClickListener event) {
+        this.eventListener = event;
     }
     //endregion
 }

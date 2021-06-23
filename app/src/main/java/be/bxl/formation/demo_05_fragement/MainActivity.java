@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
 
         // Ajouter un event a notre fragment de liste
-        listFragment.setOnClickItemListener(technology -> openFragDetail(technology));
+        listFragment.setOnTechnologyClickListener(technology -> openFragDetail(technology));
     }
 
     private void openFragDetail(DevTechnology technology) {
